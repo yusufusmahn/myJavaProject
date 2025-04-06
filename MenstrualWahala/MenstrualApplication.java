@@ -21,4 +21,24 @@ public class MenstrualApplication {
                     lastPeriod = null;
                 }
             }catch (Exception e) {
+
+              System.out.println("Invalid Date Format(use this format to continue:(YYYY-MM-DD)");
+            }
+        }
+
+        int menstrualCycleLength = 0;
+        while (menstrualCycleLength <= 0) {
+            System.out.println("Enter menstrual cycle length(eg 28 days): ");
+            try {
+                menstrualCycleLength = userInput.nextInt();
+                if (menstrualCycleLength <= 0) {
+                    System.out.println("Menstrual cycle length must be a positive integer");
+                }
+            }catch (Exception e) {
+                System.out.println("Invalid menstrual cycle length provided(correct number:eg 28 days): ");
+                userInput.nextLine();
+            }
+
+        }
+
   
