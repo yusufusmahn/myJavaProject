@@ -92,4 +92,22 @@ public class CreditCardValidator {
 
 
 
+    public static int sumOfOddIndexes(int[] number) {
+        int sum = 0;
+        for (int i = number.length - 1 ; i >= 0 ; i-=2) {
+            sum += number[i];
+        }
+        return sum;
+    }
+
+
+    public static boolean isValidateCreditCard(int[] number) {
+        int totalSum = sumOfOddIndexes(number) + sumOfSecondDigitsRightToLeft(number);
+        boolean result = totalSum % 10 == 0;
+
+        return result;
+
+    }
+
+}
 
