@@ -20,4 +20,37 @@ public class MenstrualWahala {
     public LocalDate getNextPeriodEnd() {
         return getNextPeriodStart().plusDays(periodLength - 1);
     }
+
+
+
+    public LocalDate getOvulationPeriod() {
+        return getNextPeriodEnd().minusDays(14);
+    }
+
+    public LocalDate getFertilePeriodStart() {
+        return getOvulationPeriod().minusDays(5);
+    }
+
+    public LocalDate getFertilePeriodEnd() {
+        return getOvulationPeriod().plusDays(1);
+    }
+
+    public LocalDate getSafePeriod1Start() {
+        return lastPeriodDate;
+    }
+
+    public LocalDate getSafePeriod1End() {
+        return getFertilePeriodStart().minusDays(1);
+    }
+
+    public LocalDate getSafePeriod2Start() {
+        return getFertilePeriodEnd().plusDays(1);
+    }
+
+
+    public LocalDate getSafePeriod2End() {
+        return getNextPeriodStart().minusDays(1);
+    }
+
+
 }
