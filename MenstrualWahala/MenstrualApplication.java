@@ -41,4 +41,23 @@ public class MenstrualApplication {
 
         }
 
+
+ int menstrualPeriodLength = 0;
+        while (menstrualPeriodLength <= 0) {
+            System.out.println("Enter menstrual period(eg 5 days): ");
+            try {
+                menstrualPeriodLength = userInput.nextInt();
+                if (menstrualPeriodLength <= 0) {
+                    System.out.println("Menstrual period length must be a positive integer");
+                }
+            }catch (Exception e) {
+                System.out.println("Enter a valid number: ");
+                userInput.nextLine();
+            }
+        }
+
+
+        MenstrualWahala menstrualWahala = new MenstrualWahala(lastPeriod,menstrualCycleLength,menstrualPeriodLength);
+
+
   
