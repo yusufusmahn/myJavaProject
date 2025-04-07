@@ -101,5 +101,15 @@ public class CreditCardValidator {
     }
 
 
+    public static boolean isValidateCreditCard(int[] number) {
+        int totalSum = sumOfOddIndexes(number) + sumOfSecondDigitsRightToLeft(number);
+        boolean result = totalSum % 10 == 0;
+
+        return result;
+
+    }
+
+
+
 }
 
