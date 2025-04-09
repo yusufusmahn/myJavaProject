@@ -13,13 +13,14 @@ public class MenstrualApplication {
         LocalDate lastPeriod = null;
         while (lastPeriod == null) {
             System.out.println("Enter First day of last period date: (YYYY-MM-DD)");
-            String lastPeriodDate = userInput.nextLine();
+            String lastPeriodDate = userInput.nextLine().trim();
             try {
                 lastPeriod = LocalDate.parse(lastPeriodDate);
                 if (lastPeriod.isAfter(todaysDate)) {
                     System.out.println("Menstrual cycle period cannot be after Today's Date");
                     lastPeriod = null;
                 }
+
             }catch (Exception e) {
                 System.out.println("Invalid Date Format(use this format to continue:(YYYY-MM-DD)");
             }
@@ -27,11 +28,18 @@ public class MenstrualApplication {
 
         int menstrualCycleLength = 0;
         while (menstrualCycleLength <= 0) {
-            System.out.println("Enter menstrual cycle length(eg 28 days): ");
+
             try {
+                System.out.println("Enter menstrual cycle length(eg 28 days): ");
                 menstrualCycleLength = userInput.nextInt();
-                if (menstrualCycleLength <= 0) {
+
+                if (menstrualCycleLength < 0) {
                     System.out.println("Menstrual cycle length must be a positive integer");
+                    menstrualCycleLength = 0;
+                }
+                if(menstrualCycleLength > 35){
+                    System.out.println("Menstrual period length must be within 35 days");
+                    menstrualCycleLength = 0;
                 }
             }catch (Exception e) {
                 System.out.println("Invalid menstrual cycle length provided(correct number:eg 28 days): ");
@@ -43,11 +51,16 @@ public class MenstrualApplication {
 
         int menstrualPeriodLength = 0;
         while (menstrualPeriodLength <= 0) {
-            System.out.println("Enter menstrual period(eg 5 days): ");
             try {
+                System.out.println("Enter menstrual period(eg 5 days): ");
                 menstrualPeriodLength = userInput.nextInt();
-                if (menstrualPeriodLength <= 0) {
+                if (menstrualPeriodLength < 1) {
                     System.out.println("Menstrual period length must be a positive integer");
+                    menstrualPeriodLength = 0;
+                }
+                if(menstrualPeriodLength > 7){
+                    System.out.println("Menstrual period length must be within 35 days");
+                    menstrualPeriodLength = 0;
                 }
             }catch (Exception e) {
                 System.out.println("Enter a valid number: ");
