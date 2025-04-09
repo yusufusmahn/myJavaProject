@@ -21,8 +21,7 @@ public class MenstrualApplication {
                     lastPeriod = null;
                 }
             }catch (Exception e) {
-
-              System.out.println("Invalid Date Format(use this format to continue:(YYYY-MM-DD)");
+                System.out.println("Invalid Date Format(use this format to continue:(YYYY-MM-DD)");
             }
         }
 
@@ -42,7 +41,7 @@ public class MenstrualApplication {
         }
 
 
- int menstrualPeriodLength = 0;
+        int menstrualPeriodLength = 0;
         while (menstrualPeriodLength <= 0) {
             System.out.println("Enter menstrual period(eg 5 days): ");
             try {
@@ -59,23 +58,20 @@ public class MenstrualApplication {
 
         MenstrualWahala menstrualWahala = new MenstrualWahala(lastPeriod,menstrualCycleLength,menstrualPeriodLength);
 
-
-       
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern(("yyyy-MM-dd"));
 
         System.out.println("============================================================================");
         System.out.println("\nMENSTRUAL CYCLE APP Result");
         System.out.println("============================================================================");
         System.out.println("Next Period: " +menstrualWahala.getNextPeriodStart().format(formatter) + " to " +menstrualWahala.getNextPeriodEnd().format(formatter));
+        System.out.println("Flow Date: " + menstrualWahala.getFlowDateStart().format(formatter) + " to " + menstrualWahala.getFlowDateEnd().format(formatter));
         System.out.println("Ovulation Date: "+menstrualWahala.getOvulationPeriod().format(formatter));
         System.out.println("Fertile Range: "+menstrualWahala.getFertilePeriodStart().format(formatter) + " to " +menstrualWahala.getFertilePeriodEnd().format(formatter));
         System.out.println("Safe Period1: "+menstrualWahala.getSafePeriod1Start().format(formatter) + " to " +menstrualWahala.getSafePeriod1End().format(formatter));
         System.out.println("Safe Period2: "+menstrualWahala.getSafePeriod2Start().format(formatter) + " to " +menstrualWahala.getSafePeriod2End().format(formatter));
+        System.out.println("============================================================================");
 
 
 
     }
 }
-
-
-  

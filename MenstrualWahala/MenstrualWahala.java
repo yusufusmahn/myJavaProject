@@ -21,10 +21,8 @@ public class MenstrualWahala {
         return getNextPeriodStart().plusDays(periodLength - 1);
     }
 
-
-
     public LocalDate getOvulationPeriod() {
-        return getNextPeriodEnd().minusDays(14);
+        return getNextPeriodStart().minusDays(14);
     }
 
     public LocalDate getFertilePeriodStart() {
@@ -52,5 +50,11 @@ public class MenstrualWahala {
         return getNextPeriodStart().minusDays(1);
     }
 
+    public LocalDate getFlowDateStart() {
+        return getNextPeriodStart();
+    }
 
+    public LocalDate getFlowDateEnd() {
+        return getNextPeriodEnd();
+    }
 }
