@@ -90,8 +90,6 @@ public class CreditCardValidator {
         return sum;
     }
 
-
-
     public static int sumOfOddIndexes(int[] number) {
         int sum = 0;
         for (int i = number.length - 1 ; i >= 0 ; i-=2) {
@@ -109,7 +107,8 @@ public class CreditCardValidator {
 
     }
 
-
-
 }
+
+
+
 
