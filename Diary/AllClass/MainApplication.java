@@ -61,11 +61,11 @@ public class MainApplication {
             if(input.equalsIgnoreCase("cancel")) {
                 return null;
             }
-            if(input.matches("^[a-zA-Z]{8}$")) {
+            if(input.matches("^[a-zA-Z]{5}$")) {
                 return input;
 
             }else{
-                System.out.println("Invalid Username or username not found! username should be atleast 8 characters, only letters");
+                System.out.println("Invalid Username or username not found! username should be atleast 5 characters, only letters");
             }
         }
 
@@ -78,10 +78,10 @@ public class MainApplication {
             if(input.equalsIgnoreCase("cancel")) {
                 return null;
             }
-            if(input.matches("^[a-zA-Z0-9]{10}$")) {
+            if(input.matches("^[a-zA-Z0-9]{8}$")) {
                 return input;
             }else{
-                System.out.println("Invalid Password or password incorrect! password should be atleast 10 characters, containing only letters and numbers");
+                System.out.println("Invalid Password or password incorrect! password should be atleast 8 characters, containing only letters and numbers");
             }
         }
     }
@@ -89,7 +89,6 @@ public class MainApplication {
 
     private static String getEntryIdInput() {
         while(true) {
-            System.out.print("Enter entry ID (or 'cancel' to go back): ");
             String input = userInput.nextLine().trim();
             if (input.equalsIgnoreCase("cancel")) {
                 return null;
@@ -106,7 +105,6 @@ public class MainApplication {
 
     private static String getEntryTitleInput() {
         while(true) {
-            System.out.print("Enter entry title (or 'cancel' to go back): ");
             String input = userInput.nextLine().trim();
             if(input.equalsIgnoreCase("cancel")) {
                 return null;
@@ -123,7 +121,6 @@ public class MainApplication {
     private static String getEntryBodyInput() {
         String input;
         while(true) {
-            System.out.print("Enter entry body (or 'cancel' to go back): ");
             input = userInput.nextLine().trim();
             if(input.equalsIgnoreCase("cancel")) {
                 return null;
@@ -137,7 +134,7 @@ public class MainApplication {
     }
 
     private static void createDiary() {
-        System.out.print("Select Username (at least 8 characters, letters only) or 'cancel' to go back: ");
+        System.out.println("Select Username (at least 5 characters, letters only) or 'cancel' to go back: ");
         String username = getUsernameInput();
         if(username == null) return;
 
@@ -146,8 +143,9 @@ public class MainApplication {
             return;
         }
 
-        System.out.print("Select Password (at least 10 characters, letters and numbers only) or 'cancel' to go back: ");
+        System.out.println("Select Password (at least 8 characters, letters and numbers only) or 'cancel' to go back: ");
         String password = getPasswordInput();
+        if(password == null) return;
 
         diaries.add(username, password);
         System.out.println("Your diary has been created! for user: " + username);
@@ -157,8 +155,9 @@ public class MainApplication {
 
 
     private static void findDiary() {
-        System.out.print("Enter username used to register or 'cancel' to go back: ");
+        System.out.println("Enter username used to register or 'cancel' to go back: ");
         String username = getUsernameInput();
+        if(username == null) return;
 
         diary = diaries.findByUserName(username);
         if (diary == null) {
@@ -166,8 +165,10 @@ public class MainApplication {
             return;
         }
 
-        System.out.print("Enter password used to register or 'cancel' to go back: ");
+        System.out.println("Enter password used to register or 'cancel' to go back: ");
         String password = getPasswordInput();
+        if(password == null) return;
+
 
         if(diary.isLocked()){
             diary.unlockDiary(password);
@@ -177,10 +178,8 @@ public class MainApplication {
             }
             System.out.println("Diary unlocked successfully.");
 
-        }else if(!diary.verifyPassword(password)){
-            System.out.println("Incorrect password! Cannot verify diary.");
-            return;
         }
+
         diaryMenu();
     }
 
@@ -226,12 +225,18 @@ public class MainApplication {
 
 
     private static void createEntry() {
+        System.out.println("Enter entry title (or 'cancel' to go back): ");
         String title = getEntryTitleInput();
+        if(title == null) return;
+
+        System.out.println("Enter entry body (or 'cancel' to go back): ");
         String body = getEntryBodyInput();
+        if(body == null) return;
 
         diary.createEntry(title, body);
 
         Entry lastEntryId = diary.getLatestEntryId();
+
         System.out.println("Your entry has been created!");
         System.out.println("ENTRY ID is: " + lastEntryId.getId());
         System.out.println("Created: " + lastEntryId.getDateCreated());
@@ -240,8 +245,10 @@ public class MainApplication {
     }
 
     public static void findEntryUsingId() {
+        System.out.println("Enter entry ID (or 'cancel' to go back): ");
         String id = getEntryIdInput();
         if(id == null) return;
+
 
         Entry entry = diary.findEntryById(Integer.parseInt(id));
 
@@ -259,6 +266,7 @@ public class MainApplication {
 
 
     private static void updateEntry() {
+        System.out.println("Enter id of entry to update: ");
         String id = getEntryIdInput();
         if(id == null) return;
 
@@ -268,8 +276,10 @@ public class MainApplication {
             return;
         }
 
-       String newTitle = getEntryTitleInput();
-       String newBody = getEntryBodyInput();
+        System.out.println("Enter update to add to title entry: ");
+        String newTitle = getEntryTitleInput();
+        System.out.println("Enter update to add to body entry: ");
+        String newBody = getEntryBodyInput();
 
         diary.updateEntry(Integer.parseInt(id),newTitle, newBody);
         System.out.println("Your entry has been updated!");
@@ -277,6 +287,7 @@ public class MainApplication {
 
 
     private static void deleteEntry() {
+        System.out.println("Enter id to delete entry: ");
         String id = getEntryIdInput();
         if(id == null) return;
 
@@ -292,6 +303,8 @@ public class MainApplication {
 
 
     private static void deleteDiary() {
+        System.out.println("Enter username to delete diary: ");
+
         String username = getUsernameInput();
         if(username == null) return;
 
@@ -301,6 +314,7 @@ public class MainApplication {
             return;
         }
 
+        System.out.println("Enter password to delete diary: ");
         String password = getPasswordInput();
 
         diaries.delete(username, password);
