@@ -57,16 +57,15 @@ public class MainApplication {
     private static String getUsernameInput() {
         String input;
         while(true) {
-            System.out.print("Select Username (at least 8 characters, letters only) or 'cancel' to go back: ");
             input = userInput.nextLine().trim();
             if(input.equalsIgnoreCase("cancel")) {
                 return null;
             }
-            if(input.length() <= 8 && input.matches("^[a-zA-Z]+$")) {
+            if(input.matches("^[a-zA-Z]{8}$")) {
                 return input;
 
             }else{
-                System.out.println("Invalid Username! Please use at least 8 characters, only letters");
+                System.out.println("Invalid Username or username not found! username should be atleast 8 characters, only letters");
             }
         }
 
@@ -75,15 +74,14 @@ public class MainApplication {
 
     private static String getPasswordInput() {
         while(true) {
-            System.out.print("Select Password (at least 10 characters, letters and numbers only) or 'cancel' to go back: ");
             String input = userInput.nextLine().trim();
             if(input.equalsIgnoreCase("cancel")) {
                 return null;
             }
-            if(input.length() <= 10 && input.matches("^[a-zA-Z0-9]+$")) {
+            if(input.matches("^[a-zA-Z0-9]{10}$")) {
                 return input;
             }else{
-                System.out.println("Invalid Password! Please use at least 10 characters, containing only letters and numbers");
+                System.out.println("Invalid Password or password incorrect! password should be atleast 10 characters, containing only letters and numbers");
             }
         }
     }
@@ -139,6 +137,7 @@ public class MainApplication {
     }
 
     private static void createDiary() {
+        System.out.print("Select Username (at least 8 characters, letters only) or 'cancel' to go back: ");
         String username = getUsernameInput();
         if(username == null) return;
 
@@ -147,6 +146,7 @@ public class MainApplication {
             return;
         }
 
+        System.out.print("Select Password (at least 10 characters, letters and numbers only) or 'cancel' to go back: ");
         String password = getPasswordInput();
 
         diaries.add(username, password);
@@ -157,6 +157,7 @@ public class MainApplication {
 
 
     private static void findDiary() {
+        System.out.print("Enter username used to register or 'cancel' to go back: ");
         String username = getUsernameInput();
 
         diary = diaries.findByUserName(username);
@@ -165,6 +166,7 @@ public class MainApplication {
             return;
         }
 
+        System.out.print("Enter password used to register or 'cancel' to go back: ");
         String password = getPasswordInput();
 
         if(diary.isLocked()){
