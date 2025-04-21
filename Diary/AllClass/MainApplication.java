@@ -20,7 +20,7 @@ public class MainApplication {
                     createDiary();
                     break;
                 case "2":
-                    selectDiary();
+                    findDiary();
                     break;
                 case "3":
                     deleteDiary();
@@ -44,7 +44,7 @@ public class MainApplication {
         ========== ==== MAIN MENU === =========================
         =======================================================
             1. Create Diary
-            2. Select Diary
+            2. Find Diary
             3. Delete Diary
             4. Exit
         =======================================================
@@ -156,7 +156,7 @@ public class MainApplication {
     }
 
 
-    private static void selectDiary() {
+    private static void findDiary() {
         String username = getUsernameInput();
 
         diary = diaries.findByUserName(username);
