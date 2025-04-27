@@ -1,0 +1,99 @@
+@startuml EStore
+
+package EStore {
+
+  abstract class User {
+    -age: int
+    -emailAddress: String
+    -homeAddress: Address
+    -name: String
+    -password: String
+    -phone: String
+  }
+
+  class Customer {
+    -billingInformation: List<BillingInformation>
+    -shoppingCart: ShoppingCart
+
+  }
+
+  class Seller
+  class Admin
+
+  class Address {
+    -cityName: String
+    -countryName: String
+    -houseNumber: String
+    -streetName: String
+    -state: String
+
+  }
+
+  class BillingInformation {
+    -cardOwnerName: String
+    -phoneNumber: String
+    -billingAddress: Address
+    -creditCardInformation: CreditCardInformation
+
+  }
+
+  class CreditCardInformation {
+    -cardCvv: String
+    -cardExpirationYear: int
+    -cardExpirationMonth: int
+    -creditCardNumber: String
+    -nameOnCard: String
+    -cardType: CardType
+
+  }
+
+  enum ProductCategory {
+    ELECTRONICS
+    GROCERIES
+    UTENSILS
+    CLOTHING
+  }
+
+  enum CardType {
+    MASTER_CARD
+    VISA_CARD
+    VERVE
+    AMERICA_EXPRESS
+  }
+
+  class Product {
+    -productId: String
+    -productName: String
+    -price: double
+    -productDescription: String
+    -productCategory: ProductCategory
+
+  }
+
+  class Item {
+    -product: Product
+    -quantity: int
+
+  }
+
+  class ShoppingCart {
+    -items: List<Item>
+
+  }
+
+  User <|-- Customer
+  User <|-- Seller
+  User <|-- Admin
+  User o--> "1" Address : homeAddress
+  Customer o--> "*" BillingInformation : billingInformation
+  Customer o--> "1" ShoppingCart : shoppingCart
+  BillingInformation o--> "1" Address : billingAddress
+  BillingInformation o--> "1" CreditCardInformation : creditCardInformation
+  CreditCardInformation --> "1" CardType : cardType
+  Product --> "1" ProductCategory : productCategory
+  Item o--> "1" Product : product
+  ShoppingCart o--> "*" Item : items
+
+}
+
+@enduml

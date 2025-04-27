@@ -1,0 +1,43 @@
+@startuml
+package TheWorldsProblem{
+
+enum ProblemType{
+    FINANCIAL
+    SPIRITUAL
+    EDUCATION
+    BUSINESS
+    TECHNICAL
+}
+
+
+class Problem{
+    -isSolved: boolean
+    -name: String
+    -type: ProblemType
+    -Problem(String name, ProblemType Type)
+    +createProblem(String name, ProblemType type): Problem
+}
+
+
+class Person{
+    - problems: List<Problem>
+    +addProblem(Problem): void
+    +solveProblem(Problem): void
+    +listUnsolvedProblems(): List<Problem>
+
+}
+
+class PersonTest{
++allTestCases(): void
+
+}
+
+
+Person "1" ---> "*" Problem: has
+Problem ---> ProblemType: uses
+PersonTest ----> Problem: uses
+
+
+}
+
+@enduml
